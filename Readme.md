@@ -1,5 +1,4 @@
 # Calculadora API (GQSO IFAL)
 
-Cada diretório nesse repositório implementa a calculadora em uma linguagem
-diferente.
+Esse repositório implementa uma versão da calculadora API utilizando a linguagem de programação Go. Caso queira ver a implementação em Java, favor ir para o repositório da turma 924.
  
