@@ -18,6 +18,11 @@ func raizQuadrada(c *fiber.Ctx) error {
 		return c.Status(http.StatusBadRequest).SendString(fmt.Sprintf("Parâmetro Inválido:\":%s\"", opStr))
 	}
 
+	// Verificando parâmetro.
+	if op < 0 {
+		return c.Status(http.StatusBadRequest).SendString(fmt.Sprintf("Não calculamos raiz quadrada de número negativo:\":%s\"", opStr))
+	}
+
 	// Calculando raiz quadrada.
 	raiz := math.Sqrt(op)
 
