@@ -13,7 +13,7 @@ func main() {
 		return c.SendString("Bem-vindo(a) a calculadora API.")
 	})
 
-	app.Get("/raiz/:op", raizQuadrada)
+	app.Get("/raiz/:op", raizQuadradaHandler)
 
 	app.Listen(":8000")
 }
