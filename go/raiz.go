@@ -11,15 +11,9 @@ import (
 
 func raizQuadradaHandler(c *fiber.Ctx) error {
 	opStr := c.Params("op")
-	op, err := strconv.ParseFloat(opStr, 64)
-
-	// Checando parâmetro.
-	if err != nil {
-		return c.Status(http.StatusBadRequest).SendString(fmt.Sprintf("Parâmetro Inválido:\":%s\"", opStr))
-	}
 
 	// Calculando raiz quadrada.
-	raiz, err := raizQuadrada(op)
+	raiz, err := raizQuadrada(opStr)
 	if err != nil {
 		msg := fmt.Sprintf("Erro ao calcular raiz quadrada: %s", err)
 		return c.Status(http.StatusBadRequest).SendString(msg)
@@ -29,9 +23,13 @@ func raizQuadradaHandler(c *fiber.Ctx) error {
 	return c.SendString(fmt.Sprintf("%.2f", raiz))
 }
 
-func raizQuadrada(op float64) (float64, error) {
+func raizQuadrada(opStr string) (float64, error) {
+	op, err := strconv.ParseFloat(opStr, 64)
+	if err != nil {
+		return 0, fmt.Errorf("parâmetro não é um número: %s", opStr)
+	}
 	if op < 0 {
-		return 0, fmt.Errorf("Operador negativo: %f", op)
+		return 0, fmt.Errorf("operador negativo: %f", op)
 	}
 	return math.Sqrt(op), nil
 }
