@@ -14,6 +14,7 @@ func main() {
 	})
 
 	app.Get("/raiz/:op", raizQuadradaHandler)
+	app.Get("/potencia/:base/:exp", potenciaHandler)
 
 	app.Listen(":8000")
 }
