@@ -13,8 +13,12 @@ func main() {
 		return c.SendString("Bem-vindo(a) a calculadora API.")
 	})
 
-	app.Get("/raiz/:op", raizQuadradaHandler)
-	app.Get("/potencia/:base/:exp", potenciaHandler)
+	registerHandlers(app)
 
 	app.Listen(":8000")
+}
+
+func registerHandlers(app *fiber.App) {
+	app.Get("/raiz/:op", raizQuadradaHandler)
+	app.Get("/potencia/:base/:exp", potenciaHandler)
 }
