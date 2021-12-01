@@ -1,6 +1,9 @@
 package main
 
 import (
+	"log"
+	"net"
+
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -13,9 +16,18 @@ func main() {
 		return c.SendString("Bem-vindo(a) a calculadora API.")
 	})
 
-	registerHandlers(app)
+	// Cria um listener padrão de produção. Importante para configuração
+	// de parâmetros específicos, bem como facilitar testes fim-a-fim.
+	ln, err := net.Listen(fiber.NetworkTCP, ":8080")
+	if err != nil {
+		log.Fatal(err)
+	}
+	listen(app, ln)
+}
 
-	app.Listen(":8000")
+func listen(app *fiber.App, ln net.Listener) error {
+	registerHandlers(app)
+	return app.Listener(ln)
 }
 
 func registerHandlers(app *fiber.App) {
