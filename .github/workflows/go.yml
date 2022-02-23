@@ -23,3 +23,10 @@ jobs:
 
     - name: Test
       run: go test -v ./...
+    
+    - name: Deploy
+      uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "gqso-2021-914-calc-api" #Must be unique in Heroku
+        heroku_email: "danielfireman@ifal.edu.br"
